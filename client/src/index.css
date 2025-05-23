@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improve touch targets */
+  button, a, input[type="button"], input[type="submit"] {
+    @apply min-h-[44px] min-w-[44px];
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.gray.700') theme('colors.gray.900');
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: theme('colors.gray.900');
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: theme('colors.gray.700');
+    border-radius: 3px;
+  }
+}
+
+.no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
