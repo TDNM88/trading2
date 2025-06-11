@@ -14,11 +14,19 @@ import BlogsNews from './pages/BlogsNews';
 import Updates from './pages/Updates';
 import About from './pages/About';
 import Premium from './pages/Premium';
+import BlogList from './pages/admin/BlogList';
 import Login from './pages/Login';
 import TutorialDetail from './pages/TutorialDetail';
 import IndicatorDetail from './pages/IndicatorDetail';
 import LoginPage from './pages/admin/LoginPage';
 import DashboardPage from './pages/admin/DashboardPage';
+import NewsList from './pages/admin/NewsList';
+import Userlist from './pages/admin/Userlist';
+import AddBlog from './pages/admin/AddBlog';
+import AddNews from './pages/admin/AddNews';
+import EditBlog from './pages/admin/EditBlog';
+import EditNews from './pages/admin/EditNews';
+
 
 // Move the app content to a separate component so we can use useLocation
 function AppContent() {
@@ -57,6 +65,7 @@ function AppContent() {
           
           }
         />
+        
         <Route path="/library" element={<Library />} />
         <Route path="/library/:id" element={<IndicatorDetail />} />
         <Route path="/tutorials" element={<Tutorials />} />
@@ -67,6 +76,14 @@ function AppContent() {
         <Route path="/premium" element={<Premium />} />
         <Route path="/admin/login" element={<LoginPage />} />
         <Route path="/admin/Dashboard" element={<DashboardPage />} />
+        <Route path="/admin/blogs" element={<BlogList />} />
+        <Route path="/admin/news" element={<NewsList/>} />
+        <Route path="/admin/user" element={<Userlist/>} />
+        <Route path="/admin/add-blog" element={<AddBlog />} />
+         <Route path="/admin/add-news" element={<AddNews />} /> {/* ✅ Add this route */}
+          <Route path="/admin/blogs/edit/:id" element={<EditBlog />} />
+          <Route path="/admin/news/edit/:id" element={<EditNews />} />
+
       </Routes>
       {!hideNavbar && <MarketAnalysisButton />}
     </div>
