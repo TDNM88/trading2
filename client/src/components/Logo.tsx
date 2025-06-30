@@ -105,7 +105,7 @@ const Logo = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.7 }}
         >
-          CANDLE CODEX
+          TRADING LIKE GOAT
         </motion.h1>
         <motion.p 
           className="text-xs lg:text-sm text-[#00ff41] tracking-[0.2em] font-mono mt-1"
@@ -113,7 +113,7 @@ const Logo = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.8 }}
         >
-          DECODE THE MARKET MATRIX
+          | a product from TDNM |
         </motion.p>
       </div>
     </div>
