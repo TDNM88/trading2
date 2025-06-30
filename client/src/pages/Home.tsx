@@ -32,10 +32,10 @@ const Home = () => {
             className="text-center"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">
-              Professional Trading Platform
+              1Z TRADING APP
             </h1>
             <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
-              Advanced trading indicators, real-time analytics, and professional tools for serious traders
+              Các chỉ báo giao dịch nâng cao, phân tích thời gian thực và các công cụ chuyên nghiệp dành cho các nhà giao dịch nghiêm túc
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.button
@@ -46,7 +46,7 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative flex items-center justify-center">
                   <PlayCircle className="w-6 h-6 mr-2" />
-                  <span>Start Trading Now</span>
+                  <span>Giao Dịch Ngay</span>
                   <motion.div
                     className="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"
                     initial={{ x: -10 }}
@@ -65,7 +65,7 @@ const Home = () => {
                 <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative flex items-center justify-center text-blue-400 group-hover:text-blue-300">
                   <BookOpen className="w-6 h-6 mr-2" />
-                  <span>Explore Features</span>
+                  <span>Khám phá các tính năng</span>
                   <motion.div
                     className="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"
                     initial={{ x: -10 }}
@@ -87,18 +87,18 @@ const Home = () => {
             {[
               {
                 icon: LineChart,
-                title: "Advanced Analytics",
-                description: "Real-time market analysis and predictive indicators"
+                title: "Phân tích nâng cao",
+                description: "Phân tích thị trường theo thời gian thực và các chỉ số dự đoán"
               },
               {
                 icon: TrendingUp,
-                title: "Smart Trading",
-                description: "Automated trading strategies with AI-powered insights"
+                title: "Giao dịch thông minh",
+                description: "Các chiến lược giao dịch mang tới tỷ suất lợi nhuận hấp dẫn"
               },
               {
                 icon: Activity,
-                title: "Risk Management",
-                description: "Advanced tools for portfolio and risk management"
+                title: "Quản lý rủi ro",
+                description: "Các công cụ nâng cao để quản lý danh mục đầu tư và rủi ro"
               }
             ].map((feature, index) => (
               <motion.div
@@ -125,8 +125,8 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Professional Trading Tools</h2>
-            <p className="text-xl text-gray-400">Everything you need for successful trading</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Các công cụ giao dịch chuyên nghiệp</h2>
+            <p className="text-xl text-gray-400">Mọi thứ bạn cần để giao dịch thành công</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
