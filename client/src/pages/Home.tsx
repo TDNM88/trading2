@@ -133,18 +133,18 @@ const Home = () => {
             {[
               {
                 icon: Zap,
-                title: "Real-time Signals",
-                description: "Get instant notifications for market opportunities"
+                title: "Tín hiệu thời gian thực",
+                description: "Nhận thông báo tức thì về các cơ hội thị trường"
               },
               {
                 icon: Trophy,
-                title: "Performance Tracking",
-                description: "Monitor and analyze your trading performance"
+                title: "Theo dõi hiệu suất",
+                description: "Theo dõi và phân tích hiệu suất giao dịch của bạn"
               },
               {
                 icon: Users,
-                title: "Community Insights",
-                description: "Learn from experienced traders in our community"
+                title: "Phân tích chuyên sâu",
+                description: "Hưởng lợi từ các phân tích độc quyền"
               }
             ].map((tool, index) => (
               <motion.div
@@ -158,7 +158,7 @@ const Home = () => {
                 <h3 className="text-xl font-semibold mb-2">{tool.title}</h3>
                 <p className="text-gray-400 mb-4">{tool.description}</p>
                 <button className="text-blue-500 hover:text-blue-400 font-medium flex items-center">
-                  Learn More
+                  TÌM HIỂU THÊM
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </button>
               </motion.div>
@@ -172,10 +172,10 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: "50K+", label: "Active Traders" },
-              { value: "95%", label: "Success Rate" },
-              { value: "24/7", label: "Support" },
-              { value: "100+", label: "Trading Tools" }
+              { value: "50K+", label: "Traders" },
+              { value: "95%", label: "Tỷ lệ thành công" },
+              { value: "24/7", label: "Hỗ trợ" },
+              { value: "100+", label: "Công cụ giao dịch" }
             ].map((stat, index) => (
               <motion.div
                 key={index}
