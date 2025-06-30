@@ -15,7 +15,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-[#0B1118]/60 z-[5]"></div>
           <img 
             src="https://media.giphy.com/media/JtBZm3Getg3dqxK0zP/giphy.gif" 
-            alt="Trading background"
+            alt="Ứng dụng demo gửi KH"
             className="absolute inset-0 w-full h-full object-cover z-[1]"
           />
           {/* Fallback background for when GIF is loading */}
