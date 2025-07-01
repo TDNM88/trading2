@@ -192,8 +192,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <FAQ />
+      {/* TradingViewTickerTape Section */}
+      <TradingViewTickerTape />
 
       {/* Help Form Section */}
       <HelpForm />
