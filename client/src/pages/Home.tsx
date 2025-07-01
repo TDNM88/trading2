@@ -1,11 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Home, BarChart2, TrendingUp, LineChart, DollarSign, Wallet, PlayCircle, BookOpen } from 'lucide-react';
+import { ArrowRight, Home as HomeIcon, BarChart2, TrendingUp, LineChart, DollarSign, Wallet, PlayCircle, BookOpen, Activity, Zap, Trophy, Users } from 'lucide-react';
+import CopyTrading from '../components/features/CopyTrading';
+import TradingBot from '../components/features/TradingBot';
+import BitgetEarn from '../components/features/BitgetEarn';
+import MarketInsights from '../components/features/MarketInsights';
+import CryptoPayment from '../components/features/CryptoPayment';
+import TradingAcademy from '../components/features/TradingAcademy';
 import TradingViewMiniChart from '../components/TradingViewMiniChart';
 import HelpForm from '../components/HelpForm';
 
 // Component trang chủ của ứng dụng
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="relative min-h-screen pt-16">
       {/* Phần giới thiệu chính */}
@@ -118,6 +124,12 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Phần Copy Trading */}
+      <CopyTrading />
+
+      {/* Phần Trading Bot */}
+      <TradingBot />
+
       {/* Phần công cụ giao dịch */}
       <section className="py-20 bg-gradient-to-b from-[#0B1118] to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -168,6 +180,9 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Phần BitgetEarn - Staking & Savings */}
+      <BitgetEarn />
+      
       {/* Phần thống kê */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -193,6 +208,9 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Phần Market Insights - Thông tin thị trường */}
+      <MarketInsights />
+      
       {/* Phần tổng quan thị trường tiền điện tử */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -212,6 +230,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Phần thanh toán tiền điện tử */}
+      <CryptoPayment />
+
+      {/* Phần học viện giao dịch */}
+      <TradingAcademy />
 
       {/* Phần biểu đồ giá */}
       <section className="py-20 bg-[#0B1118]">
@@ -239,7 +263,7 @@ const Home = () => {
       <nav className="fixed bottom-0 left-0 w-full bg-gray-900 text-gray-400 p-2 shadow-lg z-50">
         <div className="max-w-7xl mx-auto flex justify-around items-center">
           <a href="#" className="flex flex-col items-center text-center text-white">
-            <Home className="h-6 w-6" />
+            <HomeIcon className="h-6 w-6" />
             <span className="text-xs">Trang chủ</span>
           </a>
           <a href="#" className="flex flex-col items-center text-center">
@@ -271,4 +295,4 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+export default HomePage;
