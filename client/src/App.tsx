@@ -9,6 +9,7 @@ import HomePage from './pages/Home';
 import MarketInsightsPage from './pages/MarketInsightsPage';
 import BitgetEarnPage from './pages/BitgetEarnPage';
 import TradePage from './pages/TradePage';
+import AssetsPage from './pages/AssetsPage';
 import Dashboard from './pages/Dashboard';
 import PaperTrading from './pages/PaperTrading';
 import TradeAlgoPilot from './pages/TradeAlgoPilot';
@@ -81,7 +82,7 @@ function AppContent() {
         <Route path="/trade" element={<TradePage />} />
         <Route path="/futures" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div>} />
         <Route path="/invest" element={<BitgetEarnPage />} />
-        <Route path="/assets" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Tài sản</h1><p>Nội dung trang Tài sản đang được phát triển.</p></div>} />
+        <Route path="/assets" element={<AssetsPage />} />
       </Routes>
       {!hideNavbar && <MarketAnalysisButton />}
       {!hideNavbar && (
