@@ -56,7 +56,13 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
+  
+  // Ghi log để debug thông tin chuyển hướng
+  console.log('Login - location state:', location.state);
+  
+  // Đảm bảo luôn có đường dẫn chuyển hướng
   const from = location.state?.from?.pathname || "/dashboard";
+  console.log('Login - Redirect target after login:', from);
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setError("");
@@ -114,20 +120,26 @@ const handleSubmit = async (e: React.FormEvent) => {
         return;
       }
 
-      try {
-        // Sử dụng AuthContext login thay vì gọi API trực tiếp
-        const success = await login(formData.email, formData.password);
-        
-        if (success) {
-          console.log("Đăng nhập thành công qua AuthContext");
-          navigate(from, { replace: true });
-        } else {
-          setError("Đăng nhập thất bại.");
+        try {
+          // Sử dụng AuthContext login thay vì gọi API trực tiếp
+          const success = await login(formData.email, formData.password);
+          
+          if (success) {
+            console.log("Đăng nhập thành công qua AuthContext");
+            console.log("Đang chuyển hướng đến:", from);
+            
+            // Đảm bảo localStorage đã được cập nhật trước khi chuyển hướng
+            setTimeout(() => {
+              console.log("Bắt đầu chuyển hướng sau timeout");
+              navigate(from, { replace: true });
+            }, 100); // Thêm một khoảng thời gian nhỏ
+          } else {
+            setError("Đăng nhập thất bại.");
+          }
+        } catch (error) {
+          console.error("Login error:", error);
+          setError("Đã xảy ra lỗi khi đăng nhập.");
         }
-      } catch (error) {
-        console.error("Login error:", error);
-        setError("Đã xảy ra lỗi khi đăng nhập.");
-      }
     }
   } catch (err) {
     console.error(err);

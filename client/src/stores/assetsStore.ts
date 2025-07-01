@@ -120,7 +120,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 60132.85,
           address: 'bc1q9gpjt9h0yx3k5mvqkj34g5ggahwphjw44mhfj3',
           network: 'Bitcoin',
-          logoUrl: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png'
+          logoUrl: '/images/crypto-logos/bitcoin-btc-logo.png'
         },
         {
           id: 'eth',
@@ -135,7 +135,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 3260.43,
           address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
           network: 'Ethereum',
-          logoUrl: 'https://cryptologos.cc/logos/ethereum-eth-logo.png'
+          logoUrl: '/images/crypto-logos/ethereum-eth-logo.png'
         },
         {
           id: 'sol',
@@ -180,7 +180,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 563.55,
           address: 'bnb1m4m8vxppdc8xgade4l34tqn2t0psjqvry6dusj',
           network: 'BNB Chain',
-          logoUrl: 'https://cryptologos.cc/logos/bnb-bnb-logo.png'
+          logoUrl: '/images/crypto-logos/bnb-bnb-logo.png'
         },
         {
           id: 'xrp',
@@ -195,7 +195,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 0.55,
           address: 'rLW9gnQo7BQhU6igk5keqYnH3TVrCxGRzm',
           network: 'XRP Ledger',
-          logoUrl: 'https://cryptologos.cc/logos/xrp-xrp-logo.png'
+          logoUrl: '/images/crypto-logos/xrp-xrp-logo.png'
         },
         {
           id: 'ada',
@@ -210,7 +210,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 0.4,
           address: 'addr1qy572kptpy8tk7kd2h7mgzk3vgq4wmf5n5mcnlcdjg8q7apvj83np4s0dz2jf9q5tmncsuzvnh8vu3j3x6arfh7qmyxqnqm398',
           network: 'Cardano',
-          logoUrl: 'https://cryptologos.cc/logos/cardano-ada-logo.png'
+          logoUrl: '/images/crypto-logos/cardano-ada-logo.png'
         },
         {
           id: 'dot',
@@ -225,7 +225,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 6.0,
           address: '13FeKC32r2hLVBDHsFRidNj72cKjungJ8EGogMzxm9gJJedk',
           network: 'Polkadot',
-          logoUrl: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png'
+          logoUrl: '/images/crypto-logos/polkadot-new-dot-logo.png'
         },
         {
           id: 'usdc',
@@ -240,7 +240,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 1.0,
           address: '0x1234567890123456789012345678901234567890',
           network: 'Ethereum (ERC20)',
-          logoUrl: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.png'
+          logoUrl: '/images/crypto-logos/usd-coin-usdc-logo.png'
         },
         {
           id: 'shib',
@@ -255,7 +255,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 0.00001,
           address: '0x9876543210987654321098765432109876543210',
           network: 'Ethereum (ERC20)',
-          logoUrl: 'https://cryptologos.cc/logos/shiba-inu-shib-logo.png'
+          logoUrl: '/images/crypto-logos/shiba-inu-shib-logo.png'
         },
       ],
       
