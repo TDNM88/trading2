@@ -193,7 +193,7 @@ const Home = () => {
       </section>
 
       {/* TradingViewTickerTape Section */}
-      <TradingViewTickerTape />
+      <FAQ />
 
       {/* Help Form Section */}
       <HelpForm />
