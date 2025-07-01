@@ -16,12 +16,13 @@ const TradingViewTickerTape = () => {
         { proName: "BINANCE:BGBUSDT", title: "Bitget Token" },
         { proName: "BINANCE:BNBUSD", title: "BNB" },
         { proName: "BINANCE:SOLUSD", title: "Solana" },
-      ]
-      showSymbolLogo: false,
+        { proName: "BINANCE:XRPUSD", title: "XRP" },
+      ],
+      showSymbolLogo: true,
       isTransparent: true,
       displayMode: "adaptive",
       colorTheme: "dark",
-      locale: "in"
+      locale: "en"
     });
 
     if (container.current) {
@@ -44,7 +45,7 @@ const TradingViewTickerTape = () => {
       <div className="tradingview-widget-container__widget"></div>
       <div className="tradingview-widget-copyright">
         <a 
-          href="https://in.tradingview.com/" 
+          href="https://www.tradingview.com/" 
           rel="noopener nofollow" 
           target="_blank" 
           className="text-blue-500 hover:text-blue-400"
