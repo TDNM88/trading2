@@ -5,21 +5,22 @@ import TradingViewTickerTape from '../components/TradingViewTickerTape';
 import TradingViewMiniChart from '../components/TradingViewMiniChart';
 import HelpForm from '../components/HelpForm';
 
+// Component trang chủ của ứng dụng
 const Home = () => {
   return (
     <div className="pt-16">
-      {/* Hero Section */}
+      {/* Phần giới thiệu chính */}
       <section className="relative min-h-screen flex items-center bg-[#0B1118]">
-        {/* GIF Background */}
+        {/* Hình nền GIF */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-[#0B1118] z-10"></div>
           <div className="absolute inset-0 bg-[#0B1118]/60 z-[5]"></div>
           <img 
             src="https://media.giphy.com/media/JtBZm3Getg3dqxK0zP/giphy.gif" 
-            alt="Ứng dụng demo gửi KH"
+            alt="Ứng dụng demo gửi khách hàng"
             className="absolute inset-0 w-full h-full object-cover z-[1]"
           />
-          {/* Fallback background for when GIF is loading */}
+          {/* Hình nền dự phòng khi GIF đang tải */}
           <div 
             className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&q=80')] bg-cover bg-center"
           />
@@ -33,10 +34,10 @@ const Home = () => {
             className="text-center"
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">
-              1Z TRADING APP
+              ỨNG DỤNG GIAO DỊCH 1Z
             </h1>
             <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
-              Buy, sell, and trade Bitcoin, Ethereum, and 500+ cryptocurrencies with real-time analytics and professional tools.
+              Mua, bán và giao dịch Bitcoin, Ethereum cùng hơn 500 loại tiền điện tử với phân tích thời gian thực và công cụ chuyên nghiệp.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.button
@@ -47,7 +48,7 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative flex items-center justify-center">
                   <PlayCircle className="w-6 h-6 mr-2" />
-                  <span>Trade Now</span>
+                  <span>Giao Dịch Ngay</span>
                   <motion.div
                     className="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"
                     initial={{ x: -10 }}
@@ -66,7 +67,7 @@ const Home = () => {
                 <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative flex items-center justify-center text-blue-400 group-hover:text-blue-300">
                   <BookOpen className="w-6 h-6 mr-2" />
-                  <span>Download App</span>
+                  <span>Tải Ứng Dụng</span>
                   <motion.div
                     className="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"
                     initial={{ x: -10 }}
@@ -81,25 +82,25 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Phần tính năng */}
       <section className="py-20 bg-[#0B1118]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 icon: LineChart,
-                title: "Real-Time Analytics",
-                description: "Access live market data and predictive indicators"
+                title: "Phân Tích Thời Gian Thực",
+                description: "Truy cập dữ liệu thị trường trực tiếp và các chỉ báo dự đoán"
               },
               {
                 icon: TrendingUp,
-                title: "Copy Trading",
-                description: "Follow elite traders and replicate their strategies"
+                title: "Sao Chép Giao Dịch",
+                description: "Theo dõi các nhà giao dịch hàng đầu và sao chép chiến lược của họ"
               },
               {
                 icon: Activity,
-                title: "Futures Trading",
-                description: "Trade with up to 125x leverage on BTC, ETH, and more"
+                title: "Giao Dịch Hợp Đồng Tương Lai",
+                description: "Giao dịch với đòn bẩy lên đến 125x cho BTC, ETH và hơn thế nữa"
               }
             ].map((feature, index) => (
               <motion.div
@@ -118,7 +119,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Trading Tools Section */}
+      {/* Phần công cụ giao dịch */}
       <section className="py-20 bg-gradient-to-b from-[#0B1118] to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -126,26 +127,26 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Professional Trading Tools</h2>
-            <p className="text-xl text-gray-400">Everything you need to trade successfully</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Công Cụ Giao Dịch Chuyên Nghiệp</h2>
+            <p className="text-xl text-gray-400">Mọi thứ bạn cần để giao dịch thành công</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: Zap,
-                title: "Spot Trading",
-                description: "Trade over 500 cryptocurrencies with low fees"
+                title: "Giao Dịch Giao Ngay",
+                description: "Giao dịch hơn 500 loại tiền điện tử với phí thấp"
               },
               {
                 icon: Trophy,
-                title: "Staking & Earn",
-                description: "Earn up to 20% APR with flexible savings products"
+                title: "Staking & Kiếm Lợi Nhuận",
+                description: "Kiếm tới 20% APR với các sản phẩm tiết kiệm linh hoạt"
               },
               {
                 icon: Users,
-                title: "Community Insights",
-                description: "Access exclusive market analysis and trading signals"
+                title: "Thông Tin Cộng Đồng",
+                description: "Truy cập phân tích thị trường độc quyền và tín hiệu giao dịch"
               }
             ].map((tool, index) => (
               <motion.div
@@ -159,7 +160,7 @@ const Home = () => {
                 <h3 className="text-xl font-semibold mb-2">{tool.title}</h3>
                 <p className="text-gray-400 mb-4">{tool.description}</p>
                 <button className="text-blue-500 hover:text-blue-400 font-medium flex items-center">
-                  Learn More
+                  TÌM HIỂU THÊM
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </button>
               </motion.div>
@@ -168,15 +169,15 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Phần thống kê */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: "50K+", label: "Traders" },
-              { value: "95%", label: "Success Rate" },
-              { value: "24/7", label: "Support" },
-              { value: "100+", label: "Trading Tools" }
+              { value: "50K+", label: "Nhà Giao Dịch" },
+              { value: "95%", label: "Tỷ Lệ Thành Công" },
+              { value: "24/7", label: "Hỗ Trợ" },
+              { value: "100+", label: "Công Cụ Giao Dịch" }
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -193,7 +194,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* TradingViewTickerTape Section */}
+      {/* Phần băng giá tiền điện tử */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -201,14 +202,14 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Crypto Markets Overview</h2>
-            <p className="text-xl text-gray-400">Track top cryptocurrencies in real-time</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Tổng Quan Thị Trường Tiền Điện Tử</h2>
+            <p className="text-xl text-gray-400">Theo dõi các loại tiền điện tử hàng đầu theo thời gian thực</p>
           </motion.div>
           <TradingViewTickerTape />
         </div>
       </section>
 
-      {/* Market Charts Section */}
+      {/* Phần biểu đồ giá */}
       <section className="py-20 bg-[#0B1118]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -216,8 +217,8 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Live Crypto Prices</h2>
-            <p className="text-xl text-gray-400">Monitor real-time price movements</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Giá Tiền Điện Tử Trực Tiếp</h2>
+            <p className="text-xl text-gray-400">Theo dõi biến động giá theo thời gian thực</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <TradingViewMiniChart symbol="BITSTAMP:BTCUSD" width={350} height={220} />
@@ -227,7 +228,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Help Form Section */}
+      {/* Phần biểu mẫu hỗ trợ */}
       <HelpForm />
     </div>
   );
