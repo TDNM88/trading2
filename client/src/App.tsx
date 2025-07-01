@@ -47,27 +47,15 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route
           path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
+          element={<PrivateRoute children={<Dashboard />} />}
         />
         <Route
           path="/paper-trading"
-          element={
-            <PrivateRoute>
-              <PaperTrading />
-            </PrivateRoute>
-          }
+          element={<PrivateRoute children={<PaperTrading />} />}
         />
         <Route
           path="/trade-algo-pilot"
-          element={
-            <PrivateRoute>
-              <TradeAlgoPilot />
-            </PrivateRoute>
-          }
+          element={<PrivateRoute children={<TradeAlgoPilot />} />}
         />
         <Route path="/library" element={<Library />} />
         <Route path="/library/:id" element={<IndicatorDetail />} />
