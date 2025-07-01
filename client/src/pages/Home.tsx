@@ -1,14 +1,15 @@
 ```typescript
+import```typescript
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, LineChart, Trophy, Users, TrendingUp, Activity, Zap, PlayCircle, BookOpen } from 'lucide-react';
+import { ArrowRight, Home, BarChart2, TrendingUp, LineChart, DollarSign, Wallet, PlayCircle, BookOpen } from 'lucide-react';
 import TradingViewMiniChart from '../components/TradingViewMiniChart';
 import HelpForm from '../components/HelpForm';
 
 // Component trang chủ của ứng dụng
 const Home = () => {
   return (
-    <div className="pt-16">
+    <div className="relative min-h-screen pt-16">
       {/* Phần giới thiệu chính */}
       <section className="relative min-h-screen flex items-center bg-[#0B1118]">
         {/* Hình nền GIF */}
@@ -50,7 +51,7 @@ const Home = () => {
                   <PlayCircle className="w-6 h-6 mr-2" />
                   <span>Giao Dịch Ngay</span>
                   <motion.div
-                    className="absolute Shape0 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"
+                    className="absolute right-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"
                     initial={{ x: -10 }}
                     animate={{ x: 0 }}
                   >
@@ -202,4 +203,74 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Tổng Quan Thị Trường Tiền Điện Tử</h2>
+            <p className="text-xl text-gray-400">Theo dõi các loại tiền điện tử hàng đầu theo thời gian thực</p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <TradingViewMiniChart symbol="BITSTAMP:BTCUSD" width={300} height={200} />
+            <TradingViewMiniChart symbol="BITSTAMP:ETHUSD" width={300} height={200} />
+            <TradingViewMiniChart symbol="BINANCE:USDTUSD" width={300} height={200} />
+            <TradingViewMiniChart symbol="BINANCE:BGBUSDT" width={300} height={200} />
+          </div>
+        </div>
+      </section>
+
+      {/* Phần biểu đồ giá */}
+      <section className="py-20 bg-[#0B1118]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Giá Tiền Điện Tử Trực Tiếp</h2>
+            <p className="text-xl text-gray-400">Theo dõi biến động giá theo thời gian thực</p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <TradingViewMiniChart symbol="BITSTAMP:BTCUSD" width={350} height={220} />
+            <TradingViewMiniChart symbol="BITSTAMP:ETHUSD" width={350} height={220} />
+            <TradingViewMiniChart symbol="BINANCE:USDTUSD" width={350} height={220} />
+          </div>
+        </div>
+      </section>
+
+      {/* Phần biểu mẫu hỗ trợ */}
+      <HelpForm />
+
+      {/* Thanh điều hướng cố định ở dưới cùng */}
+      <nav className="fixed bottom-0 left-0 w-full bg-gray-900 text-gray-400 p-2 shadow-lg z-50">
+        <div className="max-w-7xl mx-auto flex justify-around items-center">
+          <a href="#" className="flex flex-col items-center text-center text-white">
+            <Home className="h-6 w-6" />
+            <span className="text-xs">Trang chủ</span>
+          </a>
+          <a href="#" className="flex flex-col items-center text-center">
+            <BarChart2 className="h-6 w-6" />
+            <span className="text-xs">Thị trường</span>
+          </a>
+          <a href="#" className="flex flex-col items-center text-center text-cyan-400 font-bold">
+            <span className="text-lg">&gt;</span>
+            <span className="text-xs">1Z</span>
+          </a>
+          <a href="#" className="flex flex-col items-center text-center">
+            <TrendingUp className="h-6 w-6" />
+            <span className="text-xs">Giao dịch</span>
+          </a>
+          <a href="#" className="flex flex-col items-center text-center">
+            <LineChart className="h-6 w-6" />
+            <span className="text-xs">Futures</span>
+          </a>
+          <a href="#" className="flex flex-col items-center text-center">
+            <DollarSign className="h-6 w-6" />
+            <span className="text-xs">Đầu tư</span>
+          </a>
+          <a href="#" className="flex flex-col items-center text-center">
+            <Wallet className="h-6 w-6" />
+            <span className="text-xs">Tài sản</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  );
+};
+export default Home;
