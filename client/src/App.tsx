@@ -79,10 +79,10 @@ function AppContent() {
         
         {/* Updated routes with implemented pages */}
         <Route path="/market" element={<MarketInsightsPage />} />
-        <Route path="/trade" element={<TradePage />} />
-        <Route path="/futures" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div>} />
-        <Route path="/invest" element={<BitgetEarnPage />} />
-        <Route path="/assets" element={<AssetsPage />} />
+        <Route path="/trade" element={<PrivateRoute children={<TradePage />} />} />
+        <Route path="/futures" element={<PrivateRoute children={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div>} />} />
+        <Route path="/invest" element={<PrivateRoute children={<BitgetEarnPage />} />} />
+        <Route path="/assets" element={<PrivateRoute children={<AssetsPage />} />} />
       </Routes>
       {!hideNavbar && <MarketAnalysisButton />}
       {!hideNavbar && (
