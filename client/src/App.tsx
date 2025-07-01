@@ -5,7 +5,7 @@ import { useTheme } from './contexts/ThemeContext'; // Để lấy theme hiện 
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import MarketAnalysisButton from './components/MarketAnalysisButton';
-import Home from './pages/Home';
+import HomePage from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import PaperTrading from './pages/PaperTrading';
 import TradeAlgoPilot from './pages/TradeAlgoPilot';
@@ -27,7 +27,7 @@ import AddBlog from './pages/admin/AddBlog';
 import AddNews from './pages/admin/AddNews';
 import EditBlog from './pages/admin/EditBlog';
 import EditNews from './pages/admin/EditNews';
-import { Home, BarChart2, TrendingUp, LineChart, DollarSign, Wallet } from 'lucide-react'; // Thêm các biểu tượng
+import { Home as HomeIcon, BarChart2, TrendingUp, LineChart, DollarSign, Wallet } from 'lucide-react'; // Đổi tên để tránh xung đột
 
 // Move the app content to a separate component so we can use useLocation
 function AppContent() {
@@ -41,7 +41,7 @@ function AppContent() {
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0B1118] text-white' : 'bg-white text-gray-900'} transition-colors duration-200`}>
       {!hideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/dashboard"
@@ -84,36 +84,43 @@ function AppContent() {
         <Route path="/admin/add-news" element={<AddNews />} />
         <Route path="/admin/blogs/edit/:id" element={<EditBlog />} />
         <Route path="/admin/news/edit/:id" element={<EditNews />} />
+        
+        {/* Thêm routes còn thiếu cho bottom navigation */}
+        <Route path="/market" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Thị trường</h1><p>Nội dung trang Thị trường đang được phát triển.</p></div>} />
+        <Route path="/trade" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Giao dịch</h1><p>Nội dung trang Giao dịch đang được phát triển.</p></div>} />
+        <Route path="/futures" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div>} />
+        <Route path="/invest" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Đầu tư</h1><p>Nội dung trang Đầu tư đang được phát triển.</p></div>} />
+        <Route path="/assets" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Tài sản</h1><p>Nội dung trang Tài sản đang được phát triển.</p></div>} />
       </Routes>
       {!hideNavbar && <MarketAnalysisButton />}
       {!hideNavbar && (
         <nav className="fixed bottom-0 left-0 w-full bg-gray-900 text-gray-400 p-2 shadow-lg z-50">
           <div className="max-w-7xl mx-auto flex justify-around items-center">
-            <NavLink to="/" className={({ isActive }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`} end>
-              <Home className="h-6 w-6" />
+            <NavLink to="/" className={({ isActive }: { isActive: boolean }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`} end>
+              <HomeIcon className="h-6 w-6" />
               <span className="text-xs">Trang chủ</span>
             </NavLink>
-            <NavLink to="/market" className={({ isActive }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
+            <NavLink to="/market" className={({ isActive }: { isActive: boolean }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
               <BarChart2 className="h-6 w-6" />
               <span className="text-xs">Thị trường</span>
             </NavLink>
             <div className="flex flex-col items-center text-center text-cyan-400 font-bold">
-              <span className="text-lg">></span>
+              <span className="text-lg">{">"}</span>
               <span className="text-xs">1Z</span>
             </div>
-            <NavLink to="/trade" className={({ isActive }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
+            <NavLink to="/trade" className={({ isActive }: { isActive: boolean }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
               <TrendingUp className="h-6 w-6" />
               <span className="text-xs">Giao dịch</span>
             </NavLink>
-            <NavLink to="/futures" className={({ isActive }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
+            <NavLink to="/futures" className={({ isActive }: { isActive: boolean }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
               <LineChart className="h-6 w-6" />
               <span className="text-xs">Futures</span>
             </NavLink>
-            <NavLink to="/invest" className={({ isActive }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
+            <NavLink to="/invest" className={({ isActive }: { isActive: boolean }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
               <DollarSign className="h-6 w-6" />
               <span className="text-xs">Đầu tư</span>
             </NavLink>
-            <NavLink to="/assets" className={({ isActive }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
+            <NavLink to="/assets" className={({ isActive }: { isActive: boolean }) => `flex flex-col items-center text-center ${isActive ? 'text-white' : ''}`}>
               <Wallet className="h-6 w-6" />
               <span className="text-xs">Tài sản</span>
             </NavLink>
