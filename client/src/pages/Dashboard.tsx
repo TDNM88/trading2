@@ -1,17 +1,10 @@
-import React, { useState , useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  TrendingUp, TrendingDown, AlertTriangle, Settings, 
-  RefreshCw, Bell, Brain, ChevronDown, ChevronUp,
-  Activity, Wallet, BookOpen, DollarSign, Bot, LineChart,
-  BarChart2, Calendar
+  TrendingUp, Bell, Brain, LineChart,
+  Activity, BarChart2, Calendar
 } from 'lucide-react';
-import {
-  LineChart as Chart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  AreaChart, Area
-} from 'recharts';
-import TradingViewChart from '../components/TradingViewChart';
 import PortfolioOverview from '../components/PortfolioOverview';
 import AnalyticsModule from '../components/AnalyticsModule';
 import AlertSystem from '../components/AlertSystem';
@@ -23,7 +16,6 @@ import MarketCharts from '../components/MarketCharts';
 const Dashboard = () => {
   const navigate = useNavigate();  // initialize navigate hook
   const [activeTab, setActiveTab] = useState('overview');
-  const [isCollapsed, setIsCollapsed] = useState(false);
     useEffect(() => {
   const token = localStorage.getItem('token');
   console.log('Token in Dashboard:', token);
@@ -34,13 +26,13 @@ const Dashboard = () => {
 
 
   const tabs = [
-    { id: 'overview', label: 'Portfolio Overview', icon: Activity },
-    { id: 'market', label: 'Market Overview', icon: BarChart2 },
-    { id: 'analytics', label: 'Analytics', icon: LineChart },
-    { id: 'trading', label: 'Trading Interface', icon: Brain },
-    { id: 'charts', label: 'Charts', icon: TrendingUp },
-    { id: 'alerts', label: 'Alerts', icon: Bell },
-    { id: 'holidays', label: 'NSE Holidays', icon: Calendar }
+    { id: 'overview', label: 'Tổng quan danh mục', icon: Activity },
+    { id: 'market', label: 'Thị trường', icon: BarChart2 },
+    { id: 'analytics', label: 'Phân tích', icon: LineChart },
+    { id: 'trading', label: 'Giao dịch', icon: Brain },
+    { id: 'charts', label: 'Biểu đồ', icon: TrendingUp },
+    { id: 'alerts', label: 'Cảnh báo', icon: Bell },
+    { id: 'holidays', label: 'Lịch nghỉ lễ', icon: Calendar }
   ];
 
   const renderContent = () => {

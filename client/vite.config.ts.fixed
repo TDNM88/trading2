@@ -52,9 +52,14 @@ export default defineConfig({
   build: {
     sourcemap: false,
     rollupOptions: {
+      maxParallelFileOps: 4, // Giới hạn số lượng file xử lý đồng thời, giúp tránh quá tải
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['framer-motion', 'lucide-react'],
+          'chart-vendor': ['recharts'],
+        }
+      }
     },
     chunkSizeWarningLimit: 1000,
     minify: 'terser',
@@ -63,7 +68,7 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
       },
-    },
+    }
   },
   resolve: {
     alias: {
