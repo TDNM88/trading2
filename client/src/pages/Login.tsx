@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useAuth } from "../contexts/AuthContext";
 import {
   User,
   Lock,
@@ -54,6 +55,7 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
   const from = location.state?.from?.pathname || "/dashboard";
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -112,24 +114,19 @@ const handleSubmit = async (e: React.FormEvent) => {
         return;
       }
 
-      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        navigate(from, { replace: true });
-      } else {
-        setError(data.message || "Login failed. Invalid credentials.");
+      try {
+        // Sử dụng AuthContext login thay vì gọi API trực tiếp
+        const success = await login(formData.email, formData.password);
+        
+        if (success) {
+          console.log("Đăng nhập thành công qua AuthContext");
+          navigate(from, { replace: true });
+        } else {
+          setError("Đăng nhập thất bại.");
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        setError("Đã xảy ra lỗi khi đăng nhập.");
       }
     }
   } catch (err) {
@@ -139,6 +136,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     setIsLoading(false);
   }
 };
+
 
 
   return (
@@ -260,7 +258,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
 interface InputFieldProps {
   label: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
   type?: string;
   value: string;
   onChange: (val: string) => void;

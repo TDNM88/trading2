@@ -104,7 +104,7 @@ const minutesAgo = (minutes: number) => new Date(Date.now() - 60000 * minutes);
 
 export const useAssetsStore = create<AssetsState>()(
   persist(
-    (set, get) => ({
+    (set: any, get: any) => ({
       // Assets data
       assets: [
         {
@@ -120,7 +120,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 60132.85,
           address: 'bc1q9gpjt9h0yx3k5mvqkj34g5ggahwphjw44mhfj3',
           network: 'Bitcoin',
-          logoUrl: '[https://cryptologos.cc/logos/bitcoin-btc-logo.png'](https://cryptologos.cc/logos/bitcoin-btc-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png'
         },
         {
           id: 'eth',
@@ -135,7 +135,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 3260.43,
           address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
           network: 'Ethereum',
-          logoUrl: '[https://cryptologos.cc/logos/ethereum-eth-logo.png'](https://cryptologos.cc/logos/ethereum-eth-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/ethereum-eth-logo.png'
         },
         {
           id: 'sol',
@@ -150,7 +150,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 142.51,
           address: 'GWSnJqjKTQJCMLVj2jHTdn4qyKNxGTrp5RhYFWB6M3Y3',
           network: 'Solana',
-          logoUrl: '[https://cryptologos.cc/logos/solana-sol-logo.png'](https://cryptologos.cc/logos/solana-sol-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/solana-sol-logo.png'
         },
         {
           id: 'usdt',
@@ -165,7 +165,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 1.0,
           address: 'TYjYGbWefHBMFsTzo5sUJKgmx85qyciYVd',
           network: 'Tron (TRC20)',
-          logoUrl: '[https://cryptologos.cc/logos/tether-usdt-logo.png'](https://cryptologos.cc/logos/tether-usdt-logo.png')
+          logoUrl: '  https://cryptologos.cc/logos/tether-usdt-logo.png'
         },
         {
           id: 'bnb',
@@ -180,7 +180,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 563.55,
           address: 'bnb1m4m8vxppdc8xgade4l34tqn2t0psjqvry6dusj',
           network: 'BNB Chain',
-          logoUrl: '[https://cryptologos.cc/logos/bnb-bnb-logo.png'](https://cryptologos.cc/logos/bnb-bnb-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/bnb-bnb-logo.png'
         },
         {
           id: 'xrp',
@@ -195,7 +195,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 0.55,
           address: 'rLW9gnQo7BQhU6igk5keqYnH3TVrCxGRzm',
           network: 'XRP Ledger',
-          logoUrl: '[https://cryptologos.cc/logos/xrp-xrp-logo.png'](https://cryptologos.cc/logos/xrp-xrp-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/xrp-xrp-logo.png'
         },
         {
           id: 'ada',
@@ -210,7 +210,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 0.4,
           address: 'addr1qy572kptpy8tk7kd2h7mgzk3vgq4wmf5n5mcnlcdjg8q7apvj83np4s0dz2jf9q5tmncsuzvnh8vu3j3x6arfh7qmyxqnqm398',
           network: 'Cardano',
-          logoUrl: '[https://cryptologos.cc/logos/cardano-ada-logo.png'](https://cryptologos.cc/logos/cardano-ada-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/cardano-ada-logo.png'
         },
         {
           id: 'dot',
@@ -225,7 +225,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 6.0,
           address: '13FeKC32r2hLVBDHsFRidNj72cKjungJ8EGogMzxm9gJJedk',
           network: 'Polkadot',
-          logoUrl: '[https://cryptologos.cc/logos/polkadot-new-dot-logo.png'](https://cryptologos.cc/logos/polkadot-new-dot-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png'
         },
         {
           id: 'usdc',
@@ -240,7 +240,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 1.0,
           address: '0x1234567890123456789012345678901234567890',
           network: 'Ethereum (ERC20)',
-          logoUrl: '[https://cryptologos.cc/logos/usd-coin-usdc-logo.png'](https://cryptologos.cc/logos/usd-coin-usdc-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.png'
         },
         {
           id: 'shib',
@@ -255,7 +255,7 @@ export const useAssetsStore = create<AssetsState>()(
           priceUsd: 0.00001,
           address: '0x9876543210987654321098765432109876543210',
           network: 'Ethereum (ERC20)',
-          logoUrl: '[https://cryptologos.cc/logos/shiba-inu-shib-logo.png'](https://cryptologos.cc/logos/shiba-inu-shib-logo.png')
+          logoUrl: 'https://cryptologos.cc/logos/shiba-inu-shib-logo.png'
         },
       ],
       
@@ -322,9 +322,328 @@ export const useAssetsStore = create<AssetsState>()(
           txid: '0x6ea3a75837d16ed20e728ba4a99551a4602dd9eb235d3cbdb49831cb93357e73',
           network: 'Tron (TRC20)'
         },
-        {
-          id: 'tx007',
-          type: 'convert',
-          coin: 'BTC',
-          amount: 0.05,
-          status
+        status: 'completed',
+        date: daysAgo(1),
+        fee: 0,
+        from: 'BTC',
+        to: 'ETH'
+      },
+      {
+        id: 'tx008',
+        type: 'earn',
+        coin: 'USDT',
+        amount: 250.5,
+        status: 'completed',
+        date: daysAgo(7),
+        fee: 0
+      },
+      {
+        id: 'tx009',
+        type: 'liquidation',
+        coin: 'SOL',
+        amount: 25.5,
+        status: 'completed',
+        date: daysAgo(12),
+        fee: 0.5
+      },
+      {
+        id: 'tx010',
+        type: 'withdrawal',
+        coin: 'ETH',
+        amount: 2.0,
+        status: 'processing',
+        date: hoursAgo(1),
+        txid: 'processing',
+        fee: 0.001,
+        to: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+        network: 'Ethereum'
+      },
+      {
+        id: 'tx011',
+        type: 'deposit',
+        coin: 'SOL',
+        amount: 100,
+        status: 'completed',
+        date: daysAgo(14),
+        txid: '5UieDC8na4Z5xJ2Qc4FXZofBwGMyccrJWVx99koAACbruhMwbSnHt94u8xDJZmBxG1xnBEhHGfwk5oTZ3aoQF69B',
+        network: 'Solana'
+      },
+    ],
+    
+    // Positions for futures trading
+    positions: [
+      {
+        id: 'pos001',
+        symbol: 'BTCUSDT',
+        leverage: 10,
+        side: 'long',
+        entryPrice: 58430.50,
+        markPrice: 60132.85,
+        size: 0.1,
+        margin: 584.3,
+        liquidationPrice: 52870.25,
+        pnl: 170.235,
+        pnlPercentage: 2.91,
+        openTime: daysAgo(5),
+        updateTime: hoursAgo(1)
+      },
+      {
+        id: 'pos002',
+        symbol: 'ETHUSDT',
+        leverage: 5,
+        side: 'short',
+        entryPrice: 3350.75,
+        markPrice: 3260.43,
+        size: 2.5,
+        margin: 1675.38,
+        liquidationPrice: 3689.75,
+        pnl: 225.8,
+        pnlPercentage: 13.48,
+        openTime: daysAgo(3),
+        updateTime: hoursAgo(2)
+      },
+      {
+        id: 'pos003',
+        symbol: 'SOLUSDT',
+        leverage: 7,
+        side: 'long',
+        entryPrice: 139.25,
+        markPrice: 142.51,
+        size: 25,
+        margin: 496.61,
+        liquidationPrice: 119.35,
+        pnl: 81.5,
+        pnlPercentage: 16.41,
+        openTime: daysAgo(1),
+        updateTime: hoursAgo(3)
+      },
+    ],
+    
+    // Open orders
+    orders: [
+      {
+        id: 'ord001',
+        symbol: 'BTCUSDT',
+        type: 'limit',
+        side: 'buy',
+        price: 58000,
+        quantity: 0.2,
+        filled: 0,
+        remainingQuantity: 0.2,
+        status: 'open',
+        timeInForce: 'GTC',
+        createdAt: daysAgo(1),
+        updatedAt: daysAgo(1)
+      },
+      {
+        id: 'ord002',
+        symbol: 'ETHUSDT',
+        type: 'stop',
+        side: 'sell',
+        price: 3100,
+        triggerPrice: 3150,
+        quantity: 3.5,
+        filled: 0,
+        remainingQuantity: 3.5,
+        status: 'open',
+        timeInForce: 'GTC',
+        createdAt: hoursAgo(12),
+        updatedAt: hoursAgo(12)
+      },
+      {
+        id: 'ord003',
+        symbol: 'SOLUSDT',
+        type: 'take_profit',
+        side: 'sell',
+        price: 155,
+        triggerPrice: 152,
+        quantity: 20,
+        filled: 0,
+        remainingQuantity: 20,
+        status: 'open',
+        timeInForce: 'GTC',
+        createdAt: hoursAgo(8),
+        updatedAt: hoursAgo(8)
+      },
+      {
+        id: 'ord004',
+        symbol: 'BTCUSDT',
+        type: 'limit',
+        side: 'sell',
+        price: 62500,
+        quantity: 0.15,
+        filled: 0,
+        remainingQuantity: 0.15,
+        status: 'open',
+        timeInForce: 'GTC',
+        createdAt: hoursAgo(5),
+        updatedAt: hoursAgo(5)
+      },
+    ],
+    
+    // Financial stats
+    balance: 350000,
+    availableBalance: 286500,
+    inOrderBalance: 63500,
+    totalPnL: 15850.75,
+    todayPnL: 1325.5,
+    totalDeposits: 250000,
+    totalWithdrawals: 45000,
+    tradingVolume24h: 125000,
+    tradingVolume7d: 875000,
+    tradingVolume30d: 3250000,
+    
+    // Methods
+    getAsset: (coinId: string) => {
+      return get().assets.find(asset => asset.id === coinId || asset.coin === coinId);
+    },
+    
+    getTransactions: (coinId?: string) => {
+      const transactions = get().transactions;
+      if (!coinId) return transactions;
+      return transactions.filter(tx => tx.coin === coinId);
+    },
+    
+    getPositions: (symbol?: string) => {
+      const positions = get().positions;
+      if (!symbol) return positions;
+      return positions.filter(pos => pos.symbol === symbol);
+    },
+    
+    getOrders: (symbol?: string) => {
+      const orders = get().orders;
+      if (!symbol) return orders;
+      return orders.filter(order => order.symbol === symbol);
+    },
+    
+    setFavorite: (coinId: string, favorite: boolean) => {
+      set(state => ({
+        assets: state.assets.map(asset => 
+          asset.id === coinId ? { ...asset, favorite } : asset
+        )
+      }));
+    },
+    
+    addTransaction: (transaction) => {
+      const newTransaction: TransactionHistory = {
+        ...transaction,
+        id: `tx${Date.now()}`,
+        date: new Date()
+      };
+      
+      set(state => ({
+        transactions: [newTransaction, ...state.transactions]
+      }));
+      
+      // Cập nhật số dư tài sản tương ứng
+      const asset = get().getAsset(transaction.coin);
+      if (asset) {
+        let balanceChange = 0;
+        
+        switch (transaction.type) {
+          case 'deposit':
+            balanceChange = transaction.amount;
+            break;
+          case 'withdrawal':
+            balanceChange = -transaction.amount;
+            break;
+          case 'trade':
+            // Xử lý logic trade phức tạp hơn nếu cần
+            break;
+        }
+        
+        if (balanceChange !== 0) {
+          set(state => ({
+            assets: state.assets.map(a => 
+              a.id === asset.id 
+                ? { 
+                    ...a, 
+                    balance: a.balance + balanceChange,
+                    availableBalance: a.availableBalance + balanceChange
+                  }
+                : a
+            )
+          }));
+        }
+      }
+    },
+    
+    addOrder: (orderData) => {
+      const order: Order = {
+        ...orderData,
+        id: `ord${Date.now()}`,
+        filled: 0,
+        remainingQuantity: orderData.quantity,
+        status: 'open',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+      
+      set(state => ({
+        orders: [order, ...state.orders]
+      }));
+      
+      // Cập nhật số dư tài sản inOrder
+      const symbol = order.symbol;
+      const coin = symbol.replace('USDT', '');
+      const asset = get().getAsset(coin);
+      
+      if (asset && order.side === 'sell') {
+        set(state => ({
+          assets: state.assets.map(a => 
+            a.id === asset.id 
+              ? {
+                  ...a,
+                  availableBalance: a.availableBalance - order.quantity,
+                  inOrder: a.inOrder + order.quantity
+                }
+              : a
+          )
+        }));
+      }
+    },
+    
+    cancelOrder: (orderId: string) => {
+      const order = get().orders.find(o => o.id === orderId);
+      if (!order) return;
+      
+      set(state => ({
+        orders: state.orders.map(o => 
+          o.id === orderId ? { ...o, status: 'canceled', updatedAt: new Date() } : o
+        )
+      }));
+      
+      // Trả lại số dư đã reserved cho order
+      if (order.side === 'sell') {
+        const symbol = order.symbol;
+        const coin = symbol.replace('USDT', '');
+        const asset = get().getAsset(coin);
+        
+        if (asset) {
+          set(state => ({
+            assets: state.assets.map(a => 
+              a.id === asset.id 
+                ? {
+                    ...a,
+                    availableBalance: a.availableBalance + order.remainingQuantity,
+                    inOrder: a.inOrder - order.remainingQuantity
+                  }
+                : a
+            )
+          }));
+        }
+      }
+    }
+  }),
+  {
+    name: 'assets-trading-store',
+    // Không lưu hàm vào localStorage
+    partialize: (state) => ({
+      assets: state.assets,
+      balance: state.balance,
+      availableBalance: state.availableBalance,
+      inOrderBalance: state.inOrderBalance
+    })
+  }
+)
+);
