@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  Wallet,
   ArrowDownToLine,
   ArrowUpFromLine,
   RefreshCw,
@@ -228,20 +227,21 @@ const AssetsPage = () => {
             className="flex items-center space-x-2 bg-gray-800/30 hover:bg-gray-800/50 rounded-lg px-4 py-2 text-sm transition-colors"
           >
             <ArrowDownToLine size={16} />
-            <span>Nạp</span>
+            <span>Nạp tiền</span>
           </button>
           <button 
             type="button"
             className="flex items-center space-x-2 bg-gray-800/30 hover:bg-gray-800/50 rounded-lg px-4 py-2 text-sm transition-colors"
           >
             <ArrowUpFromLine size={16} />
-            <span>Rút</span>
+            <span>Rút tiền</span>
           </button>
           <button 
             type="button"
             className="flex items-center justify-center bg-gray-800/30 hover:bg-gray-800/50 rounded-lg px-3 py-2 text-sm transition-colors"
           >
             <RefreshCw size={16} />
+            <span>Làm mới</span>
           </button>
         </div>
       </div>
