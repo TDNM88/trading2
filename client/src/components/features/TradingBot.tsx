@@ -1,4 +1,4 @@
-import React from 'react';
+// React is auto-imported with JSX usage
 import { motion } from 'framer-motion';
 import { Bot, Grid, Repeat, TrendingUp, ArrowRight } from 'lucide-react';
 
