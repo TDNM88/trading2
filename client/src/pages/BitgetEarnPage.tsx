@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Calendar, Clock, Info, Wallet, ArrowRight, Lock, DollarSign } from 'lucide-react';
+import { TrendingUp, Calendar, Info, Wallet, ArrowRight, Lock, DollarSign } from 'lucide-react';
 
 interface Product {
   id: string;
