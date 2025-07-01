@@ -8,10 +8,10 @@ interface PrivateRouteProps {
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const location = useLocation();
 
-  // Read token from localStorage
-  const token = localStorage.getItem("token");
-
-  const isAuthenticated = !!token;
+  // Kiểm tra trạng thái đăng nhập từ localStorage
+  const authStatus = localStorage.getItem("isAuthenticated");
+  
+  const isAuthenticated = authStatus === 'true';
 
   console.log("PrivateRoute - isAuthenticated:", isAuthenticated);
 
