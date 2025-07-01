@@ -8,6 +8,7 @@ import MarketAnalysisButton from './components/MarketAnalysisButton';
 import HomePage from './pages/Home';
 import MarketInsightsPage from './pages/MarketInsightsPage';
 import BitgetEarnPage from './pages/BitgetEarnPage';
+import TradePage from './pages/TradePage';
 import Dashboard from './pages/Dashboard';
 import PaperTrading from './pages/PaperTrading';
 import TradeAlgoPilot from './pages/TradeAlgoPilot';
@@ -77,7 +78,7 @@ function AppContent() {
         
         {/* Updated routes with implemented pages */}
         <Route path="/market" element={<MarketInsightsPage />} />
-        <Route path="/trade" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Giao dịch</h1><p>Nội dung trang Giao dịch đang được phát triển.</p></div>} />
+        <Route path="/trade" element={<TradePage />} />
         <Route path="/futures" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div>} />
         <Route path="/invest" element={<BitgetEarnPage />} />
         <Route path="/assets" element={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Tài sản</h1><p>Nội dung trang Tài sản đang được phát triển.</p></div>} />
