@@ -10,43 +10,13 @@ const TradingViewTickerTape = () => {
     script.async = true;
     script.innerHTML = JSON.stringify({
       symbols: [
-        {
-          proName: "FOREXCOM:SPXUSD",
-          title: "S&P 500 Index"
-        },
-        {
-          proName: "FOREXCOM:NSXUSD",
-          title: "US 100 Cash CFD"
-        },
-        {
-          proName: "FX_IDC:EURUSD",
-          title: "EUR to USD"
-        },
-        {
-          proName: "BITSTAMP:BTCUSD",
-          title: "Bitcoin"
-        },
-        {
-          proName: "BITSTAMP:ETHUSD",
-          title: "Ethereum"
-        },
-        {
-          description: "Nifty 50",
-          proName: "NSE:NIFTY"
-        },
-        {
-          description: "Sensex",
-          proName: "INDEX:SENSEX"
-        },
-        {
-          description: "Nifty Bank",
-          proName: "NSE:BANKNIFTY"
-        },
-        {
-          description: "Gold Futures",
-          proName: "MCX:GOLD1!"
-        }
-      ],
+        { proName: "BITSTAMP:BTCUSD", title: "Bitcoin" },
+        { proName: "BITSTAMP:ETHUSD", title: "Ethereum" },
+        { proName: "BINANCE:USDTUSD", title: "Tether" },
+        { proName: "BINANCE:BGBUSDT", title: "Bitget Token" },
+        { proName: "BINANCE:BNBUSD", title: "BNB" },
+        { proName: "BINANCE:SOLUSD", title: "Solana" },
+      ]
       showSymbolLogo: false,
       isTransparent: true,
       displayMode: "adaptive",
