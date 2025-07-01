@@ -1,5 +1,3 @@
-```typescript
-import```typescript
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Home, BarChart2, TrendingUp, LineChart, DollarSign, Wallet, PlayCircle, BookOpen } from 'lucide-react';
