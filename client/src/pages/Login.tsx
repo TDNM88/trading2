@@ -129,10 +129,16 @@ const handleSubmit = async (e: React.FormEvent) => {
             console.log("Đang chuyển hướng đến:", from);
             
             // Đảm bảo localStorage đã được cập nhật trước khi chuyển hướng
+            // Tăng timeout để đảm bảo có đủ thời gian xử lý
+            localStorage.setItem("lastLoginTime", Date.now().toString());
+            
+            // Force một rerender để đảm bảo state được cập nhật
             setTimeout(() => {
               console.log("Bắt đầu chuyển hướng sau timeout");
-              navigate(from, { replace: true });
-            }, 100); // Thêm một khoảng thời gian nhỏ
+              // Sử dụng window.location để force reload thay vì navigate
+              // Điều này đảm bảo ứng dụng được khởi động lại với trạng thái mới
+              window.location.href = from;
+            }, 500); // Tăng thời gian lên để đảm bảo localStorage đã được cập nhật
           } else {
             setError("Đăng nhập thất bại.");
           }
