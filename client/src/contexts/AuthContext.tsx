@@ -12,6 +12,7 @@ interface User {
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
+  isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   register: (userData: Omit<User, 'id'>) => Promise<boolean>;
   logout: () => void;
@@ -42,6 +43,8 @@ const parseUserFromStorage = (): User | null => {
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Trạng thái loading ban đầu để ngăn render sớm
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     return localStorage.getItem("isAuthenticated") === 'true';
   });
@@ -55,21 +58,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [isAuthenticated]);
 
   useEffect(() => {
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === "isAuthenticated") {
-        console.log('AuthContext - Storage event isAuthenticated changed:', event.newValue);
-        setIsAuthenticated(event.newValue === 'true');
-      } else if (event.key === "user") {
-        setUser(event.newValue ? JSON.parse(event.newValue) : null);
+    // Theo dõi sự kiện thay đổi trong localStorage để đồng bộ đa tab
+    const handleStorage = () => {
+      const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+      if (authStatus !== isAuthenticated) {
+        console.log("AuthContext - Phát hiện thay đổi trạng thái từ tab khác:", authStatus);
+        setIsAuthenticated(authStatus);
+        
+        if (authStatus) {
+          try {
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+              setUser(JSON.parse(storedUser));
+            }
+          } catch (e) {
+            console.error("Error parsing user from localStorage", e);
+          }
+        } else {
+          setUser(null);
+        }
       }
     };
     
-    window.addEventListener('storage', handleStorageChange);
+    // Đánh dấu đã hoàn tất quá trình khởi tạo
+    setIsLoading(false);
     
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, [isAuthenticated]);
 
   const login = async (email: string, _password: string): Promise<boolean> => {
     try {
@@ -124,8 +140,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem('isAuthenticated');
   };
 
+  // Không hiển thị nội dung cho đến khi đã xác định trạng thái xác thực
+  if (isLoading) {
+    return <div>Loading authentication...</div>;
+  }
+  
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, register, logout }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        user,
+        isLoading,
+        login,
+        register,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 'react-router-dom';
+import TransitionWrapper from './components/TransitionWrapper';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { useTheme } from './contexts/ThemeContext'; // Để lấy theme hiện tại
@@ -40,49 +41,51 @@ function AppContent() {
 
   // Hide Navbar and BottomNav on admin routes
   const hideNavbar = location.pathname.startsWith('/admin');
+  
+  // Sử dụng location.key để kích hoạt hiệu ứng chuyển trang khi đường dẫn thay đổi
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0B1118] text-white' : 'bg-white text-gray-900'} transition-colors duration-200`}>
       {!hideNavbar && <Navbar />}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<RouteGuard requiresAuth={false}><Login /></RouteGuard>} />
+      <Routes key={location.pathname}>
+        <Route path="/" element={<TransitionWrapper><HomePage /></TransitionWrapper>} />
+        <Route path="/login" element={<RouteGuard requiresAuth={false}><TransitionWrapper><Login /></TransitionWrapper></RouteGuard>} />
         <Route
           path="/dashboard"
-          element={<RouteGuard requiresAuth={true}><Dashboard /></RouteGuard>}
+          element={<RouteGuard requiresAuth={true}><TransitionWrapper><Dashboard /></TransitionWrapper></RouteGuard>}
         />
         <Route
           path="/paper-trading"
-          element={<RouteGuard requiresAuth={true}><PaperTrading /></RouteGuard>}
+          element={<RouteGuard requiresAuth={true}><TransitionWrapper><PaperTrading /></TransitionWrapper></RouteGuard>}
         />
         <Route
           path="/trade-algo-pilot"
-          element={<RouteGuard requiresAuth={true}><TradeAlgoPilot /></RouteGuard>}
+          element={<RouteGuard requiresAuth={true}><TransitionWrapper><TradeAlgoPilot /></TransitionWrapper></RouteGuard>}
         />
-        <Route path="/library" element={<Library />} />
-        <Route path="/library/:id" element={<IndicatorDetail />} />
-        <Route path="/tutorials" element={<Tutorials />} />
-        <Route path="/tutorials/:id" element={<TutorialDetail />} />
-        <Route path="/blogs-news" element={<BlogsNews />} />
-        <Route path="/updates" element={<Updates />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/premium" element={<Premium />} />
-        <Route path="/admin/login" element={<LoginPage />} />
-        <Route path="/admin/dashboard" element={<DashboardPage />} />
-        <Route path="/admin/blogs" element={<BlogList />} />
-        <Route path="/admin/news" element={<NewsList />} />
-        <Route path="/admin/user" element={<Userlist />} />
-        <Route path="/admin/add-blog" element={<AddBlog />} />
-        <Route path="/admin/add-news" element={<AddNews />} />
-        <Route path="/admin/blogs/edit/:id" element={<EditBlog />} />
-        <Route path="/admin/news/edit/:id" element={<EditNews />} />
+        <Route path="/library" element={<TransitionWrapper><Library /></TransitionWrapper>} />
+        <Route path="/library/:id" element={<TransitionWrapper><IndicatorDetail /></TransitionWrapper>} />
+        <Route path="/tutorials" element={<TransitionWrapper><Tutorials /></TransitionWrapper>} />
+        <Route path="/tutorials/:id" element={<TransitionWrapper><TutorialDetail /></TransitionWrapper>} />
+        <Route path="/blogs-news" element={<TransitionWrapper><BlogsNews /></TransitionWrapper>} />
+        <Route path="/updates" element={<TransitionWrapper><Updates /></TransitionWrapper>} />
+        <Route path="/about" element={<TransitionWrapper><About /></TransitionWrapper>} />
+        <Route path="/premium" element={<TransitionWrapper><Premium /></TransitionWrapper>} />
+        <Route path="/admin/login" element={<TransitionWrapper><LoginPage /></TransitionWrapper>} />
+        <Route path="/admin/dashboard" element={<TransitionWrapper><DashboardPage /></TransitionWrapper>} />
+        <Route path="/admin/blogs" element={<TransitionWrapper><BlogList /></TransitionWrapper>} />
+        <Route path="/admin/news" element={<TransitionWrapper><NewsList /></TransitionWrapper>} />
+        <Route path="/admin/user" element={<TransitionWrapper><Userlist /></TransitionWrapper>} />
+        <Route path="/admin/add-blog" element={<TransitionWrapper><AddBlog /></TransitionWrapper>} />
+        <Route path="/admin/add-news" element={<TransitionWrapper><AddNews /></TransitionWrapper>} />
+        <Route path="/admin/blogs/edit/:id" element={<TransitionWrapper><EditBlog /></TransitionWrapper>} />
+        <Route path="/admin/news/edit/:id" element={<TransitionWrapper><EditNews /></TransitionWrapper>} />
         
         {/* Updated routes with implemented pages */}
-        <Route path="/market" element={<MarketInsightsPage />} />
-        <Route path="/trade" element={<RouteGuard requiresAuth={true}><TradePage /></RouteGuard>} />
-        <Route path="/futures" element={<RouteGuard requiresAuth={true}><div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div></RouteGuard>} />
-        <Route path="/invest" element={<RouteGuard requiresAuth={true}><BitgetEarnPage /></RouteGuard>} />
-        <Route path="/assets" element={<RouteGuard requiresAuth={true}><AssetsPage /></RouteGuard>} />
+        <Route path="/market" element={<TransitionWrapper><MarketInsightsPage /></TransitionWrapper>} />
+        <Route path="/trade" element={<RouteGuard requiresAuth={true}><TransitionWrapper><TradePage /></TransitionWrapper></RouteGuard>} />
+        <Route path="/futures" element={<RouteGuard requiresAuth={true}><TransitionWrapper><div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div></TransitionWrapper></RouteGuard>} />
+        <Route path="/invest" element={<RouteGuard requiresAuth={true}><TransitionWrapper><BitgetEarnPage /></TransitionWrapper></RouteGuard>} />
+        <Route path="/assets" element={<RouteGuard requiresAuth={true}><TransitionWrapper><AssetsPage /></TransitionWrapper></RouteGuard>} />
       </Routes>
       {!hideNavbar && <MarketAnalysisButton />}
       {!hideNavbar && (

@@ -3,9 +3,19 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 interface RouteGuardProps {
-  children: React.ReactNode;
-  requiresAuth: boolean;
+  children: React.ReactElement;
+  requiresAuth: boolean; // true: cần đăng nhập, false: không cần đăng nhập (redirect nếu đã đăng nhập)
 }
+
+// Component loading hiển thị khi đang xác định trạng thái
+const AuthLoadingScreen: React.FC = () => (
+  <div className="flex items-center justify-center w-full h-screen bg-gray-50">
+    <div className="text-center">
+      <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <p className="mt-4 text-gray-600">Đang xác thực...</p>
+    </div>
+  </div>
+);
 
 /**
  * RouteGuard component kiểm soát việc truy cập route dựa trên trạng thái xác thực
@@ -13,23 +23,36 @@ interface RouteGuardProps {
  * @param requiresAuth - true nếu route yêu cầu xác thực, false nếu route chỉ dành cho người dùng chưa xác thực
  */
 const RouteGuard: React.FC<RouteGuardProps> = ({ children, requiresAuth }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
-  const [checking, setChecking] = useState(true);
 
-  // Hiệu ứng chạy một lần khi component mount để kiểm tra trạng thái xác thực
+  // Debug log
+  console.log(`RouteGuard check - requiresAuth: ${requiresAuth}, isAuthenticated: ${isAuthenticated}, isLoading: ${isLoading}, path: ${location.pathname}`);
+
+  // Thêm delay nhỏ để đảm bảo trạng thái xác thực đã ổn định
+  const [isReady, setIsReady] = useState(false);
+
   useEffect(() => {
-    // Thêm một chút độ trễ để đảm bảo AuthContext đã được khởi tạo đầy đủ
-    const timer = setTimeout(() => {
-      setChecking(false);
-    }, 200);
+    // Chỉ thiết lập timer nếu không còn đang loading
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        setIsReady(true);
+      }, 50);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
-  // Hiển thị màn hình loading trong khi kiểm tra
-  if (checking) {
-    return <div className="flex h-screen w-full items-center justify-center">Đang kiểm tra...</div>;
+  // Nếu đang loading từ AuthContext, hiển thị loading screen
+  if (isLoading) {
+    console.log('RouteGuard - AuthContext đang loading...');
+    return <AuthLoadingScreen />;
+  }
+
+  // Chờ một chút trước khi đưa ra quyết định chuyển hướng
+  if (!isReady) {
+    console.log('RouteGuard - Đang đợi trạng thái ổn định...');
+    return <AuthLoadingScreen />;
   }
 
   // Logic xác thực:
