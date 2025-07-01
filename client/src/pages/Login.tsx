@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuth } from "../contexts/AuthContext";
@@ -39,6 +39,10 @@ const experienceLevels = [
 ];
 
 const Login: React.FC = () => {
+  const { isAuthenticated, login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  
   const [isSignUp, setIsSignUp] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
@@ -52,10 +56,15 @@ const Login: React.FC = () => {
   });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { login } = useAuth();
+  
+  // Kiểm tra nếu người dùng đã đăng nhập thì tự động chuyển hướng đến dashboard
+  useEffect(() => {
+    if (isAuthenticated) {
+      const from = location.state?.from?.pathname || "/dashboard";
+      console.log('Người dùng đã đăng nhập, chuyển hướng đến:', from);
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate, location]);
   
   // Ghi log để debug thông tin chuyển hướng
   console.log('Login - location state:', location.state);
@@ -128,17 +137,16 @@ const handleSubmit = async (e: React.FormEvent) => {
             console.log("Đăng nhập thành công qua AuthContext");
             console.log("Đang chuyển hướng đến:", from);
             
-            // Đảm bảo localStorage đã được cập nhật trước khi chuyển hướng
-            // Tăng timeout để đảm bảo có đủ thời gian xử lý
-            localStorage.setItem("lastLoginTime", Date.now().toString());
-            
-            // Force một rerender để đảm bảo state được cập nhật
+            // Không cần setTimeout vì useEffect trong component này 
+            // sẽ phát hiện thay đổi isAuthenticated và thực hiện chuyển hướng
+            // Tuy nhiên, nếu có vấn đề với state updates, chúng ta vẫn sử dụng
+            // phương pháp dự phòng với window.location
             setTimeout(() => {
-              console.log("Bắt đầu chuyển hướng sau timeout");
-              // Sử dụng window.location để force reload thay vì navigate
-              // Điều này đảm bảo ứng dụng được khởi động lại với trạng thái mới
-              window.location.href = from;
-            }, 500); // Tăng thời gian lên để đảm bảo localStorage đã được cập nhật
+              if (window.location.pathname === '/login') {
+                console.log("Chuyển hướng dự phòng sau khi đăng nhập");
+                window.location.href = from;
+              }
+            }, 1000);
           } else {
             setError("Đăng nhập thất bại.");
           }

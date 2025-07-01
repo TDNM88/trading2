@@ -47,10 +47,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(getInitialAuth());
   const [user, setUser] = useState<User | null>(getInitialUser());
   console.log('AuthProvider - isAuthenticated:', isAuthenticated);
-console.log('AuthProvider - user:', user);
+  console.log('AuthProvider - user:', user);
+  
+  // Kiểm tra trạng thái đăng nhập khi component mount
+  React.useEffect(() => {
+    const checkAuth = () => {
+      const authStatus = localStorage.getItem('isAuthenticated');
+      const storedUser = localStorage.getItem('user');
+      
+      if (authStatus === 'true' && storedUser) {
+        setIsAuthenticated(true);
+        try {
+          setUser(JSON.parse(storedUser));
+        } catch (e) {
+          console.error('Error parsing user data:', e);
+        }
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
+      }
+    };
+    
+    // Kiểm tra ngay khi component mount
+    checkAuth();
+    
+    // Thêm event listener để theo dõi thay đổi trong localStorage từ các tab/window khác
+    window.addEventListener('storage', checkAuth);
+    
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+    };
+  }, []);
 
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, _password: string): Promise<boolean> => {
     // Test user mode - allow easy login with any credentials
     // For demo/test purposes, we create a rich user profile
     const testUser: User = {
@@ -67,12 +97,22 @@ console.log('AuthProvider - user:', user);
       role: 'premium_user'
     } as User;
 
-    setUser(testUser);
-    setIsAuthenticated(true);
-    localStorage.setItem('user', JSON.stringify(testUser));
-    localStorage.setItem('isAuthenticated', 'true');
-    console.log('Đã đăng nhập với tài khoản test:', testUser);
-    return true;
+    try {
+      // Đảm bảo thứ tự cập nhật: trước tiên localStorage, sau đó state
+      localStorage.setItem('user', JSON.stringify(testUser));
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('authTimestamp', Date.now().toString());
+      
+      // Sau đó mới cập nhật state
+      setUser(testUser);
+      setIsAuthenticated(true);
+      
+      console.log('Đã đăng nhập với tài khoản test:', testUser);
+      return true;
+    } catch (error) {
+      console.error('Lỗi khi lưu thông tin đăng nhập:', error);
+      return false;
+    }
   };
 
   const register = async (userData: Omit<User, 'id'>): Promise<boolean> => {
