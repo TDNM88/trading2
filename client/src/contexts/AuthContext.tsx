@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface User {
   id: string;
@@ -27,16 +27,14 @@ export const useAuth = () => {
   return context;
 };
 
-const getInitialAuth = (): boolean => {
-  return localStorage.getItem('isAuthenticated') === 'true';
-};
-
-const getInitialUser = (): User | null => {
+// Hàm trợ giúp để parse user từ localStorage, bao gồm xử lý lỗi
+const parseUserFromStorage = (): User | null => {
   const storedUser = localStorage.getItem('user');
   if (!storedUser) return null;
   try {
     return JSON.parse(storedUser);
   } catch {
+    // Nếu dữ liệu lưu trữ bị hỏng, xóa để tránh lỗi trong tương lai
     localStorage.removeItem('user');
     localStorage.removeItem('isAuthenticated');
     return null;
@@ -44,73 +42,62 @@ const getInitialUser = (): User | null => {
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(getInitialAuth());
-  const [user, setUser] = useState<User | null>(getInitialUser());
-  console.log('AuthProvider - isAuthenticated:', isAuthenticated);
-  console.log('AuthProvider - user:', user);
-  
-  // Kiểm tra trạng thái đăng nhập khi component mount
-  React.useEffect(() => {
-    const checkAuth = () => {
-      const authStatus = localStorage.getItem('isAuthenticated');
-      const storedUser = localStorage.getItem('user');
-      
-      if (authStatus === 'true' && storedUser) {
-        setIsAuthenticated(true);
-        try {
-          setUser(JSON.parse(storedUser));
-        } catch (e) {
-          console.error('Error parsing user data:', e);
-        }
-      } else {
-        setIsAuthenticated(false);
-        setUser(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return localStorage.getItem("isAuthenticated") === 'true';
+  });
+  const [user, setUser] = useState<User | null>(() => {
+    return parseUserFromStorage();
+  });
+
+  useEffect(() => {
+    console.log('AuthContext - isAuthenticated state:', isAuthenticated);
+    console.log('AuthContext - localStorage isAuthenticated:', localStorage.getItem("isAuthenticated"));
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === "isAuthenticated") {
+        console.log('AuthContext - Storage event isAuthenticated changed:', event.newValue);
+        setIsAuthenticated(event.newValue === 'true');
+      } else if (event.key === "user") {
+        setUser(event.newValue ? JSON.parse(event.newValue) : null);
       }
     };
     
-    // Kiểm tra ngay khi component mount
-    checkAuth();
-    
-    // Thêm event listener để theo dõi thay đổi trong localStorage từ các tab/window khác
-    window.addEventListener('storage', checkAuth);
+    window.addEventListener('storage', handleStorageChange);
     
     return () => {
-      window.removeEventListener('storage', checkAuth);
+      window.removeEventListener('storage', handleStorageChange);
     };
   }, []);
 
-
   const login = async (email: string, _password: string): Promise<boolean> => {
-    // Test user mode - allow easy login with any credentials
-    // For demo/test purposes, we create a rich user profile
-    const testUser: User = {
-      id: '123456',
-      email: email || 'test@example.com',
-      tradingViewId: 'tradingview_premium',
-      tradingStyle: 'Đa chiến lược',
-      capital: '100000',
-      experience: '5+ năm',
-      // Thêm các thông tin phụ để test tính năng
-      fullName: 'Người Dùng Test',
-      memberSince: '01/01/2023',
-      isPremium: true,
-      role: 'premium_user'
-    } as User;
-
     try {
-      // Đảm bảo thứ tự cập nhật: trước tiên localStorage, sau đó state
-      localStorage.setItem('user', JSON.stringify(testUser));
-      localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('authTimestamp', Date.now().toString());
+      console.log(`Đang đăng nhập với email: ${email}...`);
       
-      // Sau đó mới cập nhật state
-      setUser(testUser);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Tạo một user giả lập cho mục đích test
+      const mockUser = {
+        id: '1',
+        email,
+        name: 'Test User',
+      };
+
+      console.log('AuthContext - Đăng nhập thành công, cập nhật state và localStorage');
+      
+      // Cập nhật state trước
+      setUser(mockUser);
       setIsAuthenticated(true);
       
-      console.log('Đã đăng nhập với tài khoản test:', testUser);
+      // Sau đó cập nhật localStorage
+      localStorage.setItem("user", JSON.stringify(mockUser));
+      localStorage.setItem("isAuthenticated", 'true');
+      
       return true;
     } catch (error) {
-      console.error('Lỗi khi lưu thông tin đăng nhập:', error);
+      console.error('Login error:', error);
       return false;
     }
   };

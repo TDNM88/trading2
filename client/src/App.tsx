@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 're
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { useTheme } from './contexts/ThemeContext'; // Để lấy theme hiện tại
-import PrivateRoute from './components/PrivateRoute';
+import RouteGuard from './components/RouteGuard';
 import Navbar from './components/Navbar';
 import MarketAnalysisButton from './components/MarketAnalysisButton';
 import HomePage from './pages/Home';
@@ -46,18 +46,18 @@ function AppContent() {
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<RouteGuard requiresAuth={false}><Login /></RouteGuard>} />
         <Route
           path="/dashboard"
-          element={<PrivateRoute children={<Dashboard />} />}
+          element={<RouteGuard requiresAuth={true}><Dashboard /></RouteGuard>}
         />
         <Route
           path="/paper-trading"
-          element={<PrivateRoute children={<PaperTrading />} />}
+          element={<RouteGuard requiresAuth={true}><PaperTrading /></RouteGuard>}
         />
         <Route
           path="/trade-algo-pilot"
-          element={<PrivateRoute children={<TradeAlgoPilot />} />}
+          element={<RouteGuard requiresAuth={true}><TradeAlgoPilot /></RouteGuard>}
         />
         <Route path="/library" element={<Library />} />
         <Route path="/library/:id" element={<IndicatorDetail />} />
@@ -79,10 +79,10 @@ function AppContent() {
         
         {/* Updated routes with implemented pages */}
         <Route path="/market" element={<MarketInsightsPage />} />
-        <Route path="/trade" element={<PrivateRoute children={<TradePage />} />} />
-        <Route path="/futures" element={<PrivateRoute children={<div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div>} />} />
-        <Route path="/invest" element={<PrivateRoute children={<BitgetEarnPage />} />} />
-        <Route path="/assets" element={<PrivateRoute children={<AssetsPage />} />} />
+        <Route path="/trade" element={<RouteGuard requiresAuth={true}><TradePage /></RouteGuard>} />
+        <Route path="/futures" element={<RouteGuard requiresAuth={true}><div className="pt-20 pb-24 px-4"><h1 className="text-2xl font-bold mb-4">Futures</h1><p>Nội dung trang Futures đang được phát triển.</p></div></RouteGuard>} />
+        <Route path="/invest" element={<RouteGuard requiresAuth={true}><BitgetEarnPage /></RouteGuard>} />
+        <Route path="/assets" element={<RouteGuard requiresAuth={true}><AssetsPage /></RouteGuard>} />
       </Routes>
       {!hideNavbar && <MarketAnalysisButton />}
       {!hideNavbar && (

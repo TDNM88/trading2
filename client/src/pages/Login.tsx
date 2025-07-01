@@ -57,14 +57,10 @@ const Login: React.FC = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   
-  // Kiểm tra nếu người dùng đã đăng nhập thì tự động chuyển hướng đến dashboard
+  // Ghi log trạng thái đăng nhập hiện tại để debug
   useEffect(() => {
-    if (isAuthenticated) {
-      const from = location.state?.from?.pathname || "/dashboard";
-      console.log('Người dùng đã đăng nhập, chuyển hướng đến:', from);
-      navigate(from, { replace: true });
-    }
-  }, [isAuthenticated, navigate, location]);
+    console.log('Login - Trạng thái đăng nhập hiện tại:', isAuthenticated);
+  }, [isAuthenticated]);
   
   // Ghi log để debug thông tin chuyển hướng
   console.log('Login - location state:', location.state);
@@ -79,84 +75,94 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   try {
     if (isSignUp) {
+      // Xử lý đăng ký (Registration)
       if (currentStep === 1) {
+        // Step 1: Validate email và password
         if (!formData.email.trim() || !formData.password.trim()) {
           setError("Please enter email and password.");
           setIsLoading(false);
           return;
         }
+        
+        // Chuyển sang bước 2 nếu bước 1 hợp lệ
         setCurrentStep(2);
         setIsLoading(false);
         return;
-      }
-
-      // Step 2 validation
-      if (
-        !formData.tradingViewId?.trim() ||
-        !formData.tradingStyle ||
-        !formData.capital?.trim() ||
-        !formData.experience
-      ) {
-        setError("Please fill in all required trading details.");
-        setIsLoading(false);
-        return;
-      }
-         console.log("Submitting registration", formData);
-
-      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      console.log(data);
-      if (res.ok) {
-        // Optionally store token if backend sends one
-        if (data.token) {
-          localStorage.setItem("token", data.token);
+      } else if (currentStep === 2) {
+        // Step 2: Validate thông tin trading
+        if (
+          !formData.tradingViewId?.trim() ||
+          !formData.tradingStyle ||
+          !formData.capital?.trim() ||
+          !formData.experience
+        ) {
+          setError("Please fill in all required trading details.");
+          setIsLoading(false);
+          return;
         }
-        navigate(from, { replace: true });
-      } else {
-        setError(data.message || "Registration failed. Try again.");
+        
+        console.log("Submitting registration", formData);
+
+        // Gửi thông tin đăng ký
+        try {
+          const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+
+          const data = await res.json();
+          console.log(data);
+          
+          if (res.ok) {
+            // Nếu đăng ký thành công, lưu token nếu có
+            if (data.token) {
+              localStorage.setItem("token", data.token);
+            }
+            navigate(from, { replace: true });
+          } else {
+            setError(data.message || "Registration failed. Try again.");
+          }
+        } catch (err) {
+          console.error("Registration error:", err);
+          setError("Có lỗi khi đăng ký. Vui lòng thử lại.");
+        }
       }
     } else {
+      // Xử lý đăng nhập (Login)
       if (!formData.email.trim() || !formData.password.trim()) {
-        setError("Please enter email and password.");
+        setError("Vui lòng điền đầy đủ thông tin.");
         setIsLoading(false);
         return;
       }
 
-        try {
-          // Sử dụng AuthContext login thay vì gọi API trực tiếp
-          const success = await login(formData.email, formData.password);
+      try {
+        // Sử dụng AuthContext login thay vì gọi API trực tiếp
+        const success = await login(formData.email, formData.password);
+        
+        if (success) {
+          console.log("Đăng nhập thành công qua AuthContext");
+          console.log("Đang chuyển hướng đến:", from);
           
-          if (success) {
-            console.log("Đăng nhập thành công qua AuthContext");
-            console.log("Đang chuyển hướng đến:", from);
-            
-            // Không cần setTimeout vì useEffect trong component này 
-            // sẽ phát hiện thay đổi isAuthenticated và thực hiện chuyển hướng
-            // Tuy nhiên, nếu có vấn đề với state updates, chúng ta vẫn sử dụng
-            // phương pháp dự phòng với window.location
-            setTimeout(() => {
-              if (window.location.pathname === '/login') {
-                console.log("Chuyển hướng dự phòng sau khi đăng nhập");
-                window.location.href = from;
-              }
-            }, 1000);
-          } else {
-            setError("Đăng nhập thất bại.");
-          }
-        } catch (error) {
-          console.error("Login error:", error);
-          setError("Đã xảy ra lỗi khi đăng nhập.");
+          // Đăng nhập thành công - RouteGuard sẽ tự động xử lý chuyển hướng
+          // Chỉ cần đảm bảo state được cập nhật đầy đủ
+          setTimeout(() => {
+            setIsLoading(false);
+            // Không cần gọi navigate vì RouteGuard sẽ xử lý
+          }, 100);
+        } else {
+          setIsLoading(false);
+          setError("Đăng nhập thất bại.");
         }
+      } catch (error) {
+        console.error("Login error:", error);
+        setError("Đã xảy ra lỗi khi đăng nhập.");
+      }
     }
   } catch (err) {
-    console.error(err);
+    console.error("General error:", err);
     setError("Something went wrong. Please try again.");
   } finally {
     setIsLoading(false);

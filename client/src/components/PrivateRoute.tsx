@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 interface PrivateRouteProps {
   children: ReactNode;
@@ -7,13 +8,11 @@ interface PrivateRouteProps {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const location = useLocation();
-
-  // Kiểm tra trạng thái đăng nhập từ localStorage
-  const authStatus = localStorage.getItem("isAuthenticated");
+  const { isAuthenticated } = useAuth();
   
-  const isAuthenticated = authStatus === 'true';
-
-  console.log("PrivateRoute - isAuthenticated:", isAuthenticated);
+  // Ghi log để debug
+  console.log("PrivateRoute - isAuthenticated từ AuthContext:", isAuthenticated);
+  console.log("PrivateRoute - path hiện tại:", location.pathname);
 
   if (!isAuthenticated) {
     // Redirect to login page if not authenticated
