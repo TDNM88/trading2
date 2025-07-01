@@ -1,7 +1,11 @@
-import React from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import React, { ReactNode } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoute: React.FC = () => {
+interface PrivateRouteProps {
+  children: ReactNode;
+}
+
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const location = useLocation();
 
   // Read token from localStorage
@@ -16,7 +20,8 @@ const PrivateRoute: React.FC = () => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  return <Outlet />;
+  // Return children instead of Outlet since we're using it as a wrapper
+  return <>{children}</>;
 };
 
 export default PrivateRoute;
